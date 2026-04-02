@@ -17,14 +17,8 @@ namespace Assignment07
 
         private int Factorial(int n)
         {
-            // base case
-            if(n <= 1) return 1;
-            // recursive case
-            return n * Factorial(n-1);
-            //10 * Factorial(10-1)
-            //9 * Factorial(9-1)
-            //..
-            //1 * Factorial(1-1)
+            if (n <= 1) return 1;
+            return n * Factorial(n - 1);
         }
 
         public void LCT02_RecursiveFibonacci(int n)
@@ -35,10 +29,9 @@ namespace Assignment07
 
         private int Fibonacci(int n)
         {
-            // base case
-            if(n <= 1) return n;
-            // recursive case
-            return Fibonacci(n-1) + Fibonacci(n - 2);
+            if (n <= 0) return 0;
+            if (n == 1) return 1;
+            return Fibonacci(n - 1) + Fibonacci(n - 2);
         }
 
         public void LCT03_RecursiveSumOfOneToN(int n)
@@ -49,10 +42,8 @@ namespace Assignment07
 
         private int SumOfOneToN(int n)
         {
-            // base case
-            if(n<=0) return 0;
-            // recursive case
-            return n + SumOfOneToN(n-1);
+            if (n <= 1) return n;
+            return n + SumOfOneToN(n - 1);
         }
 
         public void LCT04_RecursiveSumOfNumbers(int[] numbers)
@@ -63,11 +54,8 @@ namespace Assignment07
 
         private int SumOfNumbers(int[] numbers, int index)
         {
-            // base case
-
-            // recursive case
-
-            return -1;
+            if (index >= numbers.Length) return 0;
+            return numbers[index] + SumOfNumbers(numbers, index + 1);
         }
 
         #endregion
@@ -82,22 +70,29 @@ namespace Assignment07
 
         private int Power(int baseNum, int exponent)
         {
-            return -1;
+            if (exponent == 0) return 1;
+            return baseNum * Power(baseNum, exponent - 1);
         }
 
         public void ASN02_IsPalindrome(string str)
         {
-            bool result = IsPalindrome(str, 0, str.Length - 1);
-            if (result)
-                Debug.Log($"is a palindrome");
-            else
-                Debug.Log($"is not a palindrome");
+            bool result = IsPalindromeRecursive(str.ToLower(), 0, str.Length - 1);
 
+            if (result)
+            {
+                Debug.Log("is a palindrome");
+            }
+            else
+            {
+                Debug.Log("is not a palindrome");
+            }
         }
 
-        private bool IsPalindrome(string str, int start, int end)
+        private bool IsPalindromeRecursive(string str, int left, int right)
         {
-            return false;
+            if (left >= right) return true;
+            if (str[left] != str[right]) return false;
+            return IsPalindromeRecursive(str, left + 1, right - 1);
         }
 
         public void ASN03_RecursiveGCD(int a, int b)
@@ -108,18 +103,25 @@ namespace Assignment07
 
         private int GCD(int a, int b)
         {
-            return -1;
+            if (b == 0) return a;
+            return GCD(b, a % b);
         }
 
         public void ASN04_RecursiveBinarySearch(int[] arr, int target)
         {
-            int result = BinarySearch(arr, target, 0, arr.Length - 1);
+            int result = BinarySearchRecursive(arr, target, 0, arr.Length - 1);
             Debug.Log($"{result}");
         }
 
-        private int BinarySearch(int[] arr, int target, int low, int high)
+        private int BinarySearchRecursive(int[] arr, int target, int left, int right)
         {
-            return -1;
+            if (left > right) return -1;
+
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] == target) return mid;
+            if (arr[mid] > target) return BinarySearchRecursive(arr, target, left, mid - 1);
+            return BinarySearchRecursive(arr, target, mid + 1, right);
         }
 
         #endregion

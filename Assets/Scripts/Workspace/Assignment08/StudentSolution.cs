@@ -17,12 +17,34 @@ namespace Assignment08
 
         public void LCT01_StackSyntax()
         {
-            throw new NotImplementedException();
+            Stack<int> stack = new Stack<int>();
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+            Debug.Log($"Count: {stack.Count}");
+
+            var popped = stack.Pop();
+            Debug.Log($"Popped: {popped}");
+
+            var top = stack.Peek();
+            Debug.Log($"Peek: {top}");
+            Debug.Log($"Count after peek: {stack.Count}");
         }
 
         public void LCT02_QueueSyntax()
         {
-            throw new NotImplementedException();
+            Queue<int> queue = new Queue<int>();
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+            queue.Enqueue(3);
+            Debug.Log($"Count: {queue.Count}");
+
+            var dequeued = queue.Dequeue();
+            Debug.Log($"Dequeue: {dequeued}");
+
+            var front = queue.Peek();
+            Debug.Log($"Peek: {front}");
+            Debug.Log($"Count after dequeue: {queue.Count}");
         }
 
         public void LCT03_ActionStack()
@@ -30,7 +52,17 @@ namespace Assignment08
             Action action1 = new Action { Name = "Action 1" };
             Action action2 = new Action { Name = "Action 2" };
             Action action3 = new Action { Name = "Action 3" };
-            throw new NotImplementedException();
+            
+            Stack<Action> actionStack = new Stack<Action>();
+            actionStack.Push(action1);
+            actionStack.Push(action2);
+            actionStack.Push(action3);
+
+            while (actionStack.Count > 0)
+            {
+                var action = actionStack.Pop();
+                Debug.Log($"Executing {action.Name}");
+            }
         }
 
         public void LCT04_ActionQueue()
@@ -38,21 +70,65 @@ namespace Assignment08
             Action action1 = new Action { Name = "Action 1" };
             Action action2 = new Action { Name = "Action 2" };
             Action action3 = new Action { Name = "Action 3" };
-            throw new NotImplementedException();
+            Queue<Action> actionQueue = new Queue<Action>();
+            actionQueue.Enqueue(action1);
+            actionQueue.Enqueue(action2);
+            actionQueue.Enqueue(action3);
+
+            while (actionQueue.Count > 0)
+            {
+                var action = actionQueue.Dequeue();
+                Debug.Log($"Executing {action.Name}");
+            }
         }
 
         #endregion
 
-        #region Assignment
+            #region Assignment
 
         public void ASN01_ReverseString(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> charStack = new Stack<char>();
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                charStack.Push(str[i]);
+            }
+
+            string result = "";
+
+            while (charStack.Count > 0)
+            {
+                result = result + charStack.Pop();
+            }
+
+            Debug.Log(result);
         }
 
         public void ASN02_StackPalindrome(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> charStack = new Stack<char>();
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                charStack.Push(str[i]);
+            }
+
+            string reversed = "";
+
+            while (charStack.Count > 0)
+            {
+                reversed = reversed + charStack.Pop();
+            }
+
+            if (str == reversed)
+            {
+                Debug.Log("is a palindrome");
+            }
+            else
+            {
+                Debug.Log("is not a palindrome");
+            }
         }
 
         #endregion
@@ -61,7 +137,58 @@ namespace Assignment08
 
         public void EX01_ParenthesesChecker(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+            bool isBalanced = true;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                char c = str[i];
+
+                if (c == '(' || c == '[' || c == '{')
+                {
+                    stack.Push(c);
+                }
+                else if (c == ')' || c == ']' || c == '}')
+                {
+                    if (stack.Count == 0)
+                    {
+                        isBalanced = false;
+                        break;
+                    }
+
+                    char open = stack.Pop();
+
+                    if (c == ')' && open != '(')
+                    {
+                        isBalanced = false;
+                        break;
+                    }
+                    else if (c == ']' && open != '[')
+                    {
+                        isBalanced = false;
+                        break;
+                    }
+                    else if (c == '}' && open != '{')
+                    {
+                        isBalanced = false;
+                        break;
+                    }
+                }
+            }
+
+            if (stack.Count > 0)
+            {
+                isBalanced = false;
+            }
+
+            if (isBalanced)
+            {
+                Debug.Log("Balanced");
+            }
+            else
+            {
+                Debug.Log("Unbalanced");
+            }
         }
 
         #endregion
